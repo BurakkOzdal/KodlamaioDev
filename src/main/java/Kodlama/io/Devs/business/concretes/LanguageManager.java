@@ -67,12 +67,31 @@ public class LanguageManager implements LanguageService{
 	@Override
 	public GetLanguageByIdResponse getById(int languageId) throws Exception {
 	    Optional<Language> findLanguage=languageRepository.findById(languageId);
+	    List<Technology> technologies=this.technologyRepository.findAll();
+	    
 	    GetLanguageByIdResponse responseItem=new GetLanguageByIdResponse();
 	   
 	    if (findLanguage.isPresent()) {
 	        Language getLanguage=findLanguage.get();
+	        
+	        List<GetAllTechnologyResponse> technologyResponses=new ArrayList<GetAllTechnologyResponse>();
+            
+            for (Technology technology : technologies) {
+                
+                if (technology.getLanguage().getId()==getLanguage.getId()) {
+                    
+                    GetAllTechnologyResponse technologyResponse= new GetAllTechnologyResponse();
+                    
+                    technologyResponse.setId(technology.getId());
+                    technologyResponse.setName(technology.getName());
+                    technologyResponse.setLanguageId(technology.getLanguage().getId());
+                    
+                    technologyResponses.add(technologyResponse);
+                }
+            }
 	        responseItem.setName(getLanguage.getName());
 	        responseItem.setId(getLanguage.getId());
+	        responseItem.setFrameworks(technologyResponses);
 	        return responseItem;
             
         }else {
