@@ -57,11 +57,16 @@ public class LanguageManager implements LanguageService{
             
             languageReponse.setId(language.getId());
             languageReponse.setName(language.getName());
-            languageReponse.setFrameworks(technologyResponses);
+            //languageReponse.setFrameworks(technologyResponses);
             languageResponse.add(languageReponse);
         }
 	    
 		return languageResponse;
+	}
+
+	@Override
+	public List<GetAllLanguageResponse> getAllWithQuery() {
+		return this.languageRepository.getAllWithQuery();
 	}
 
 	@Override
@@ -99,6 +104,7 @@ public class LanguageManager implements LanguageService{
         }
 	 
 	}
+
 
 	@Override
 	public void create(CreateLanguageRequest createLanguageRequest) throws Exception{

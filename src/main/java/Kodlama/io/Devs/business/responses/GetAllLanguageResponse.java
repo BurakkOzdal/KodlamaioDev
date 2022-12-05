@@ -14,5 +14,6 @@ public class GetAllLanguageResponse {
     
     private int id;
     private String name;
-    private List<GetAllTechnologyResponse> frameworks;
+    private String frameworkName;
+    //private List<GetAllTechnologyResponse> frameworks;
 }

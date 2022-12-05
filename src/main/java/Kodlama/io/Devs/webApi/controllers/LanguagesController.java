@@ -33,12 +33,17 @@ public class LanguagesController {
 	public List<GetAllLanguageResponse> getAll(){
 		return languageService.getAll();
 	}
-	
+
+	@GetMapping("/getallwithquery")
+	public List<GetAllLanguageResponse> getAllLanguageResponses(){
+		return this.languageService.getAllWithQuery();
+	}
+
+
 	@GetMapping("/getbyid")
 	public GetLanguageByIdResponse getById(@RequestParam int id) throws Exception {
 		return languageService.getById(id);
 	}
-	
 	@PostMapping("/add")
 	public void createLanguage(@RequestBody CreateLanguageRequest createLanguageRequest) throws Exception {
 		 this.languageService.create(createLanguageRequest);
